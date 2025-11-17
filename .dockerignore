@@ -1,0 +1,38 @@
+# Build artifacts
+.gradle
+build
+target
+!build/libs
+out
+.mvn/
+*.jar
+*.war
+
+# IntelliJ
+.idea
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and reports
+logs/
+tmp/
+*.log
+test-output/
+reports/
+
+# Git
+.git
+.gitignore
+
+# Documentation
+docs/
+*.md
+
+src/test/
+
+# Sensitive files
+.env
+*.key
