@@ -2,18 +2,21 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: snowflakes-pod
+  labels:
+    app: snowflakes-app
 spec:
   restartPolicy: OnFailure
   containers:
-    - image: snowflakes:1.1
-      name: snowflakes-app
+    - image: snowflakes:1.2
+      name: snowflakes-container
+      imagePullPolicy: Never
       ports:
         - containerPort: 8080
           name: http
           protocol: TCP
       livenessProbe:
         httpGet:
-          path: /healthy
+          path: /management/health/livenessState
           port: 8080
         initialDelaySeconds: 15
         timeoutSeconds: 2
@@ -21,7 +24,7 @@ spec:
         failureThreshold: 3
       readinessProbe:
         httpGet:
-          path: /ready
+          path: /management/health/readinessState
           port: 8080
         initialDelaySeconds: 5
         timeoutSeconds: 1
@@ -41,4 +44,4 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 30080
+      nodePort: 31080
