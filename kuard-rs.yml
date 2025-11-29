@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: kuard-replicaset
+  labels:
+    app: kuard-pod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kuard-pod
+  template:
+    metadata:
+      labels:
+        app: kuard-pod
+    spec:
+      containers:
+        - image: jmutai/kuard-amd64:blue
+          name: kuard-container
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthy
+              port: 8080
+            initialDelaySeconds: 15
+            timeoutSeconds: 2
+            periodSeconds: 20
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
