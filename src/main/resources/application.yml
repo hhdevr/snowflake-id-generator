@@ -4,8 +4,10 @@ spring:
 
 snowflake-settings:
   starting-epoch: 946684800
-  datacenter-id: 1
-  worked-id: 1
+  node-name: ${NODE_NAME}
+  node-ip: ${NODE_IP}
+  pod-name: ${POD_NAME}
+  pod-ip: ${POD_IP}
 
 management:
   endpoints:
