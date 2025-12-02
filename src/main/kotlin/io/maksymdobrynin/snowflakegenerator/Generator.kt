@@ -4,9 +4,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeout
-import org.springframework.stereotype.Service
 
-@Service
 class Generator(
 	private val settings: GeneratorSettings,
 ) {
@@ -94,6 +92,21 @@ class Generator(
 				(settings.workedId shl workerIdShift) or
 				settings.sequence
 		}
+
+    fun getKubeDescription(): String =
+        """
+        ========= NODE
+        Node name: ${settings.datacenterName}
+        Node IP: ${settings.datacenterIP}
+        Node ID: ${settings.datacenterId}
+        Node ID shifted: ${settings.datacenterId shl datacenterIdShift}
+        ========= POD
+        Pod Name: ${settings.workedName}
+        Pod-IP: ${settings.workedIP}
+        Pod ID: ${settings.workedId}
+        Pod ID shifted: ${settings.workedId shl workerIdShift}
+        =========
+        """
 
 	private suspend fun wait(): Long =
 		withTimeout(NEW_TIMESTAMP_TIMEOUT) {
