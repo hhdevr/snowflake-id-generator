@@ -7,6 +7,6 @@ spec:
   selector:
     app: snowflakes-pod
   ports:
-    - port: 8080
+    - port: 81
       targetPort: 8080
       nodePort: 31080
