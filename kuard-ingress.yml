@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kuard-ingress
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+    - host: kuard.localdev.iprody
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kuard-service
+                port:
+                  number: 80
