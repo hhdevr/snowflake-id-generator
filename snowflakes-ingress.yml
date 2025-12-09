@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: snowflakes-ingress
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+    - host: sf.localdev.iprody
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: snowflakes-service
+                port:
+                  number: 81
+
