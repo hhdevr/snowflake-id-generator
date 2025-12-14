@@ -1,7 +1,7 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: snowflakes-replicaset
+  name: snowflakes-deployment
   labels:
     app: snowflakes-pod
 spec:
@@ -9,6 +9,11 @@ spec:
   selector:
     matchLabels:
       app: snowflakes-pod
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
   template:
     metadata:
       labels:
