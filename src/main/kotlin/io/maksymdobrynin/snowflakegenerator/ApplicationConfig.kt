@@ -9,31 +9,32 @@ import org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(GeneratorSettingsProperties::class)
 open class ApplicationConfig {
 
-    @Bean
-    open fun generator(settingsProps: GeneratorSettingsProperties): Generator {
-        val settings = GeneratorSettings(
-            startingEpoch = settingsProps.startingEpoch,
-            datacenterName = settingsProps.nodeName,
-            datacenterId = extract5Bits(settingsProps.nodeName),
-            datacenterIP = settingsProps.nodeIp,
-            workedName = settingsProps.podName,
-            workedId = extract5Bits(settingsProps.podName),
-            workedIP = settingsProps.podIp,
-            sequence = settingsProps.sequence
-        )
-        return Generator(settings)
-    }
+	@Bean
+	open fun generator(settingsProps: GeneratorSettingsProperties): Generator {
+		val settings = GeneratorSettings(
+			startingEpoch = settingsProps.startingEpoch,
+			datacenterName = settingsProps.nodeName,
+			datacenterId = extract5Bits(settingsProps.nodeName),
+			datacenterIP = settingsProps.nodeIp,
+			workedName = settingsProps.podName,
+			workedId = settingsProps.workedId,
+			workedIP = settingsProps.podIp,
+			sequence = settingsProps.sequence
+		)
+		return Generator(settings)
+	}
 
-    private fun extract5Bits(name: String): Long =
-        name.hashCode().toLong() and 0x1F
+	private fun extract5Bits(name: String): Long =
+		name.hashCode().toLong() and 0x1F
 }
 
 @ConfigurationProperties(prefix = "snowflake-settings")
 data class GeneratorSettingsProperties(
-    var startingEpoch: Long = 946684800L,
-    var nodeName: String = "nodeName",
-    var nodeIp: String = "nodeIp",
-    var podName: String = "podName",
-    var podIp: String = "podIp",
-    var sequence: Long = 0L,
+	var startingEpoch: Long = 946684800L,
+	var nodeName: String = "nodeName",
+	var nodeIp: String = "nodeIp",
+	var podName: String = "podName",
+	var podIp: String = "podIp",
+	var workedId: Long = 0,
+	var sequence: Long = 0L,
 )
