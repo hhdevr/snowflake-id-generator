@@ -5,6 +5,10 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: contour
 spec:
+  tls:
+    - hosts:
+        - kuard.localdev.iprody
+      secretName: kuard-tls
   rules:
     - host: kuard.localdev.iprody
       http:

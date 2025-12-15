@@ -29,3 +29,25 @@ spec:
         periodSeconds: 5
         failureThreshold: 3
         successThreshold: 1
+      env:
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: sf-kuard-config
+              key: LOG_LEVEL
+        - name: MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: sf-kuard-config
+              key: MESSAGE
+      volumeMounts:
+        - name: kuard-config-volume
+          mountPath: /config
+          readOnly: true
+  volumes:
+    - name: kuard-config-volume
+      configMap:
+        name: sf-kuard-config
+        items:
+          - key: app-settings.json
+            path: app-settings.json

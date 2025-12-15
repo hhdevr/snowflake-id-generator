@@ -8,6 +8,7 @@ snowflake-settings:
   node-ip: ${NODE_IP}
   pod-name: ${POD_NAME}
   pod-ip: ${POD_IP}
+  worked-id: ${WORKED_ID}
 
 management:
   endpoints:

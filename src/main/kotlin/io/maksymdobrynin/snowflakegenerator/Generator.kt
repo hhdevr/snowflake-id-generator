@@ -93,8 +93,8 @@ class Generator(
 				settings.sequence
 		}
 
-    fun getKubeDescription(): String =
-        """
+	fun getKubeDescription(): String =
+		"""
         ========= NODE
         Node name: ${settings.datacenterName}
         Node IP: ${settings.datacenterIP}
@@ -103,7 +103,7 @@ class Generator(
         ========= POD
         Pod Name: ${settings.workedName}
         Pod-IP: ${settings.workedIP}
-        Pod ID: ${settings.workedId}
+        Worked ID: ${settings.workedId}
         Pod ID shifted: ${settings.workedId shl workerIdShift}
         =========
         """
