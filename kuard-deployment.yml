@@ -1,14 +1,21 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: kuard-replicaset
+  name: kuard-deployment
   labels:
     app: kuard-pod
+  annotations:
+    kubernetes.io/change-cause: "Update to x.y.z"
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: kuard-pod
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
   template:
     metadata:
       labels:
