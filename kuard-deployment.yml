@@ -7,7 +7,7 @@ metadata:
   annotations:
     kubernetes.io/change-cause: "Update to x.y.z"
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: kuard-pod
@@ -28,6 +28,13 @@ spec:
             - containerPort: 8080
               name: http
               protocol: TCP
+          resources:
+              requests:
+                cpu: "500m"
+                memory: "256Mi"
+              limits:
+                cpu: "1000m"
+                memory: "500Mi"
           livenessProbe:
             httpGet:
               path: /healthy
