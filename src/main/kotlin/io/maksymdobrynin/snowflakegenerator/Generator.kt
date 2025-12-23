@@ -93,6 +93,8 @@ class Generator(
 				settings.sequence
 		}
 
+	fun getKubeSettings(): GeneratorSettings = settings;
+
 	fun getKubeDescription(): String =
 		"""
         ========= NODE
