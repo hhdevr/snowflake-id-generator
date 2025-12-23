@@ -24,6 +24,19 @@ spec:
       containers:
         - image: jmutai/kuard-amd64:blue
           name: kuard-container
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-0.postgres:5432/kuard_db
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: kuard-postgres-secret
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kuard-postgres-secret
+                  key: POSTGRES_PASSWORD
           ports:
             - containerPort: 8080
               name: http

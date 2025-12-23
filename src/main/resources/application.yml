@@ -2,6 +2,19 @@ spring:
   application:
     name: "Snowflake ID Generator"
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
 snowflake-settings:
   starting-epoch: 946684800
   node-name: ${NODE_NAME}
@@ -26,4 +39,6 @@ management:
     livenessstate:
       enabled: true
     readinessstate:
+      enabled: true
+    db:
       enabled: true
