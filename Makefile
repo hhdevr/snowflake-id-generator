@@ -1,4 +1,4 @@
-.PHONY: delete del
+.PHONY: build kubedel run re
 
 IMAGE_NAME ?= snowflakes
 TAG ?= 1.5
@@ -30,6 +30,8 @@ kubedel:
 	kubectl delete -f snowflakes-service.yml --ignore-not-found
 	kubectl delete -f snowflakes-tls-secret.yml --ignore-not-found
 	kubectl delete -f kuard-service.yml --ignore-not-found
+	kubectl delete -f fluentd-config.yml --ignore-not-found
+	kubectl delete -f fluentd-ds.yml --ignore-not-found
 
 run:
 #kuard
@@ -44,3 +46,8 @@ run:
 	kubectl apply -f snowflakes-service.yml
 	kubectl apply -f snowflakes-tls-secret.yml
 	kubectl apply -f kuard-service.yml
+#fluentd
+	kubectl apply -f fluentd-config.yml
+	kubectl apply -f fluentd-ds.yml
+
+re: kubedel build run
