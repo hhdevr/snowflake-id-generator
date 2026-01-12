@@ -2,9 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kuard-ingress
-  annotations:
-    kubernetes.io/ingress.class: contour
 spec:
+  ingressClassName: contour
   tls:
     - hosts:
         - kuard.localdev.iprody

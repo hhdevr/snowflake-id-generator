@@ -9,7 +9,7 @@ build:
 	docker build -t $(IMAGE_NAME):$(TAG) \
 		--build-arg JAR_FILE=$(JAR_FILE) .
 
-kubedel:
+clean:
 	kubectl delete -f postgres-configmap.yml --ignore-not-found
 	kubectl delete -f postgres-pv.yml --ignore-not-found
 	kubectl delete -f postgres-pvc.yml --ignore-not-found
