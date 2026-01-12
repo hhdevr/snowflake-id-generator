@@ -1,0 +1,12 @@
+apiVersion: v2
+name: snowflake
+description: A Helm chart for Kubernetes-snowflake
+
+type: application
+version: 0.1.0
+appVersion: 1.6
+
+dependencies:
+  - name: postgresql
+    version: 0.1.0
+    repository: "file://../postgresql"

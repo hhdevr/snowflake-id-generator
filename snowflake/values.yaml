@@ -1,0 +1,140 @@
+replicaCount: 3
+
+global:
+  db:
+    name: k8s_db
+    user: postgres
+    password: postgres
+
+image:
+  repository: snowflakes
+  tag: 1.6
+  pullPolicy: IfNotPresent
+
+service:
+  name: service
+  type: NodePort
+  port: 8080
+  targetPort: 8080
+  nodePort: 30080
+
+deployment:
+  name: deployment
+
+httpRoute:
+  enabled: false
+
+secret:
+  tls:
+    crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIDwzCCAqugAwIBAgIUSXcXgh8zOdM/OmjHKrs+62fKhPAwDQYJKoZIhvcNAQEL
+      BQAwNDEyMDAGA1UEAwwpbXktc2VydmljZS5teS1uYW1lc3BhY2Uuc3ZjLmNsdXN0
+      ZXIubG9jYWwwHhcNMjYwMTI2MjE0MTUyWhcNMjcwMTI2MjE0MTUyWjA0MTIwMAYD
+      VQQDDClteS1zZXJ2aWNlLm15LW5hbWVzcGFjZS5zdmMuY2x1c3Rlci5sb2NhbDCC
+      ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJDmOc3ZFpIvfdfxmuzmnJ3D
+      Fzai/il5X4ckuyj+nLuAjlYakssuLTa4K170IcqN6a1F6VLWcCjd6aLfJjmfDdA7
+      wSqXsLA2rzv1eyxncSe395WfkFwFZ0tfMGhHPct9g/rbrrZB9V8HlfmBlwOMBn8T
+      2/pPmN57aCBtKbJ8edk0oK5RXRr8f7i47dzOx2SslzUweosPMqisNPBAgZhuaTct
+      r/qSCetrRENgceIzlxxPq8zIPqZyxY7uDWRtZ5aErUVAlFa5BMAslxYBdTiQjgGV
+      iERV/lkMGxvrjAve7jBQSYo5WeO7i4Y/TS/iA5vqp34PbS6lgOGQq6VNmNauEw8C
+      AwEAAaOBzDCByTAdBgNVHQ4EFgQUxaDP7rh6n3HKPmg2425SimYuztYwHwYDVR0j
+      BBgwFoAUxaDP7rh6n3HKPmg2425SimYuztYwDwYDVR0TAQH/BAUwAwEB/zB2BgNV
+      HREEbzBtggpteS1zZXJ2aWNlghdteS1zZXJ2aWNlLm15LW5hbWVzcGFjZYIbbXkt
+      c2VydmljZS5teS1uYW1lc3BhY2Uuc3ZjgilteS1zZXJ2aWNlLm15LW5hbWVzcGFj
+      ZS5zdmMuY2x1c3Rlci5sb2NhbDANBgkqhkiG9w0BAQsFAAOCAQEAeOrHRPvM2yJ2
+      oDt9Fb/+p9+pSth916fhXOXbB8ke9hcAzuq+RlM581TsVpG5xPEcB7M2xdoIWpnc
+      2MdUki7NzinPFjgnPsrCCjeH/Li33Byy2/2EUiFkbWYRI3jH7MVbIvhjUPDC2n5p
+      MIIpdDuDzOPT3U64Dhg8L0Irhv46ZlGKMrPSoZBdOVoqIlE9GyZdv3MweGmTnQdc
+      1PAC4Q7pdl4ogOPrwaEQHd+uaqOP5VwUIlZ20SJgIyoN9stO9kXZUfsM9s11oSZ8
+      m7hyVgQx9IUxi3ACzRiDQexcKu8nAmYk7ITqR2YR9wk18Fsi0Np+j+yoO4Bk2Te8
+      XKQwCgDOyg==
+      -----END CERTIFICATE-----
+    key: |
+      -----BEGIN PRIVATE KEY-----
+      MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCQ5jnN2RaSL33X
+      8Zrs5pydwxc2ov4peV+HJLso/py7gI5WGpLLLi02uCte9CHKjemtRelS1nAo3emi
+      3yY5nw3QO8Eql7CwNq879XssZ3Ent/eVn5BcBWdLXzBoRz3LfYP62662QfVfB5X5
+      gZcDjAZ/E9v6T5jee2ggbSmyfHnZNKCuUV0a/H+4uO3czsdkrJc1MHqLDzKorDTw
+      QIGYbmk3La/6kgnra0RDYHHiM5ccT6vMyD6mcsWO7g1kbWeWhK1FQJRWuQTALJcW
+      AXU4kI4BlYhEVf5ZDBsb64wL3u4wUEmKOVnju4uGP00v4gOb6qd+D20upYDhkKul
+      TZjWrhMPAgMBAAECggEAGK9wN5Z9VuhKWyipCST8l4/t+3vnKu+ni6GBVSmTUApF
+      tXuPeJfkUgcsNGAJBbYJkmBvsJIhx4SO0hWMMJLdSpVzgisXid23GtLmahkxWN/p
+      iQ8HC/ZLs7aCy7EfYPSAMJOOfzRbdhYXwcsHDC6lyK58cndvBrAlfCi8ytCT/aHM
+      +fx6ugPq7P3Pby00bC3WZhrqREv5YPAeYx5QetdJ49EKg4Lyy3uG81pejwEEfJOC
+      9C6mAG2JptppFJQYAcEpTk6uDssvj3qcERjMJiPblNjGRSZoBPHJ7LnsPyFQvlLj
+      jISMr7cUZJXtWXI3p8ltzeSJO0J3SnP1jCQbyhdVuQKBgQDGwagYNOwNXblgJGzh
+      4vZa76i+m74sr0GUnN9291LzzXQpI4WFL3PlB79vYbOTW0bKawIgn2/Zzuh1cwu/
+      LmzemmOwIM9l7Vlsph5G4HT5tMr64j3+f0jmvQzXiKYtqmGCDz1HSYYIB5QrMx0T
+      kd6UQavNegP9t25ZMHj3tIiKfQKBgQC6oaxwnNCdQd/VU8GWap3ZT+7EgV4N6N+Z
+      /e4nj9jhLQile7CiwtZp1Cq43njTosTK6zH+OTCvWL/G4N5mZekxESvlTOGzrGpM
+      xKiGBnsnJIsDj1b1P95sjqg0OYnghGHLAIrqFMTQ7toL69uWxwBeLsjaBKjKhVbO
+      XHzziO79ewKBgEJEsWIYyxeNx1AJ9Q+/l7osLAwZa2gEqw382/kTb2IAf5lz0YHd
+      l3umgKqHXdNk3I6C7TupTSbG+PSn/iOpO/1gZpqD5gKrB2TVYkTpc7cKE59graDc
+      GZdtMwnt8tJI+6fcoubQ2dJ1jG525VvwB9FQsBKbexcuAKnWIo8cb2YVAoGAS7CT
+      8dv3Uz/LGoZsZad5uw+K41EgJv4B6T8t3gedyrzr28lNOsVQFf2BEhbP4+0IaM94
+      KAVjtEmHBY5fRCIir86qAcXrZ2YOenHrcuef/KD6bAgvGSm8+EPm/b80JsUpsB3Z
+      ONQRejbUYa9XEFBG2uuYc6seFXx8Vxb1agNoAY8CgYAeSdcjhu+kky2zR0k+C1vL
+      TsR6QSajeeiVsukrANHum/9OqLbdKAkUlnyzbyB82oYTRVkPx6PWxxXdxGdnJImN
+      NtwdpHlnNGQoJkPd6Y8fSg3NvlhKucWYIMs/zVGeD3cNONPkEloceXqFcCOveYp5
+      tj2NuOV5iQQLZb1rRE9svg==
+      -----END PRIVATE KEY-----
+
+ingress:
+  name: ingress
+  enabled: true
+  className: contour
+  host: snowflakes.local.iprody
+  hosts:
+    - host: snowflakes.local.iprody
+      portNumber: 81
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: snowflakes-tls
+      hosts:
+        - snowflakes.local.iprody
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  requests:
+    cpu: 500m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
+livenessProbe:
+  httpGet:
+    path: /management/health/livenessState
+    port: 8080
+readinessProbe:
+  httpGet:
+    path: /management/health/readinessState
+    port: 8080
+
+autoscaling:
+  name: hpa
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70
+  targetMemoryAverageValue: 378Mi
+
+volumes:
+  - name: env-config
+
+volumeMounts:
+  - name: env-config
+    mountPath: /env
+    readOnly: true
+
+nodeSelector: { }
+
+tolerations: [ ]
+
+affinity: { }
