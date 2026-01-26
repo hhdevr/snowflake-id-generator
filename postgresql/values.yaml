@@ -1,0 +1,43 @@
+replicas: 1
+
+image:
+  repository: postgres
+  tag: "15"
+  pullPolicy: IfNotPresent
+
+serviceName: postgres
+
+labels:
+  app: postgres
+
+db:
+  name: k8s_db
+  user: postgres
+  password: postgres
+
+service:
+  port: 5432
+
+container:
+  port: 5432
+  mountPath: /var/lib/postgresql/data
+
+persistence:
+  storageClass: hostpath
+  size: 1Gi
+  accessMode: ReadWriteOnce
+
+probes:
+  liveness:
+    initialDelaySeconds: 30
+    periodSeconds: 20
+    timeoutSeconds: 5
+    failureThreshold: 3
+  readiness:
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+
+podLabels: {}
+podAnnotations: {}
